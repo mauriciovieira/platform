@@ -1,8 +1,11 @@
 <template name="uploadCoverPhotoButton">
   {{# if spinnerEnabled }}
     {{> spinner }}
+    <p>Test</p>
+
+  {{ else }}
+    <a class="btn btn-primary" id="cover-photo-browse">
+      {{_ 'uploadCoverPhotoButton_textButton' }}
+    </a>
   {{/ if }}
-  <a class="btn btn-primary" id="cover-photo-browse">
-    {{_ 'uploadCoverPhotoButton_textButton' }}
-  </a>
 </template>
