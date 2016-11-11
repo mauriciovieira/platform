@@ -23,28 +23,9 @@ Template.uploadCoverPhotoButton.onRendered(function() {
   // Assign resumable browse to element
   CoverPhoto.resumable.assignBrowse($('#cover-photo-browse'));
 
-  // Set cover photo id to branding collection on Success
-  CoverPhoto.resumable.on('fileSuccess', function (file) {
-    // Turn off spinner
-    instance.uploadingSpinner.set(false);
-
-    // Get the id from project logo file object
-    const coverPhotoFileId = file.uniqueIdentifier;
-
-    // Get branding
-    const branding = Branding.findOne();
-
-    // Update logo id field
-    Branding.update(branding._id, { $set: { coverPhotoFileId } });
-
-    // Get upload success message translation
-    const message = TAPi18n.__('uploadCoverPhoto_successfully_uploaded');
-
-    // Alert user of successful upload
-    sAlert.success(message);
-  });
-
+  // Event handler for file added
   CoverPhoto.resumable.on('fileAdded', function (file) {
+    console.log(file.uniqueIdentifier);
     CoverPhoto.insert({
       _id: file.uniqueIdentifier,
       filename: file.fileName,
@@ -70,6 +51,27 @@ Template.uploadCoverPhotoButton.onRendered(function() {
         sAlert.error(message);
       }
     });
+  });
+
+  // Set cover photo id to branding collection on Success
+  CoverPhoto.resumable.on('fileSuccess', function (file) {
+    // Turn off spinner
+    instance.uploadingSpinner.set(false);
+
+    // Get the id from project logo file object
+    const coverPhotoFileId = file.uniqueIdentifier;
+
+    // Get branding
+    const branding = Branding.findOne();
+
+    // Update logo id field
+    Branding.update(branding._id, { $set: { coverPhotoFileId } });
+
+    // Get upload success message translation
+    const message = TAPi18n.__('uploadCoverPhoto_successfully_uploaded');
+
+    // Alert user of successful upload
+    sAlert.success(message);
   });
 });
 
