@@ -15,7 +15,7 @@ Template.uploadCoverPhotoButton.onCreated(function () {
 
   // Create reactive variable to track upload spinner state
   instance.uploadingSpinner = new ReactiveVar(false);
-})
+});
 
 Template.uploadCoverPhotoButton.onRendered(function() {
   const instance = this;
@@ -61,14 +61,14 @@ Template.uploadCoverPhotoButton.onRendered(function() {
         // Turn on spinner
         instance.uploadingSpinner.set(true);
         // Upload the cover photo
-        return CoverPhoto.resumable.upload();
+        CoverPhoto.resumable.upload();
+      } else {
+        // Get extension error message
+        const message = TAPi18n.__('uploadCoverPhoto_acceptedExtensions');
+        
+        // Alert user of extension error
+        sAlert.error(message);
       }
-
-      // Get extension error message
-      const message = TAPi18n.__('uploadCoverPhoto_acceptedExtensions');
-
-      // Alert user of extension error
-      sAlert.error(message);
     });
   });
 });
@@ -77,7 +77,7 @@ Template.uploadCoverPhotoButton.helpers({
   spinnerEnabled () {
     // Get reference to template instance
     const instance = Template.instance();
-
+    console.log("spinner", instance.uploadingSpinner.get());
     // Get value of spinner
     return instance.uploadingSpinner.get();
   },
