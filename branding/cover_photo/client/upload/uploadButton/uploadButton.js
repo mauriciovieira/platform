@@ -21,7 +21,7 @@ Template.uploadCoverPhotoButton.onRendered(function() {
   const instance = this;
 
   // Assign resumable browse to element
-  const test = CoverPhoto.resumable.assignBrowse($('#cover-photo-browse'));
+  CoverPhoto.resumable.assignBrowse($('#cover-photo-browse'));
 
   // Set cover photo id to branding collection on Success
   CoverPhoto.resumable.on('fileSuccess', function (file) {
@@ -45,7 +45,7 @@ Template.uploadCoverPhotoButton.onRendered(function() {
   });
 
   CoverPhoto.resumable.on('fileAdded', function (file) {
-    return CoverPhoto.insert({
+    CoverPhoto.insert({
       _id: file.uniqueIdentifier,
       filename: file.fileName,
       contentType: file.file.type,
@@ -65,7 +65,7 @@ Template.uploadCoverPhotoButton.onRendered(function() {
       } else {
         // Get extension error message
         const message = TAPi18n.__('uploadCoverPhoto_acceptedExtensions');
-        
+
         // Alert user of extension error
         sAlert.error(message);
       }
