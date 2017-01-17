@@ -19,6 +19,10 @@
       2,
       "always-multiline"
     ],
+    "func-names": [
+      "error",
+      "never"
+    ],
     "import/no-extraneous-dependencies": 0,
     "space-before-function-paren": [
       2,
