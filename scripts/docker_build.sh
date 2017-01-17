@@ -3,6 +3,7 @@
 set -ev
 
 echo "TRAVIS_EVENT_TYPE ${TRAVIS_EVENT_TYPE}"
+echo "TRAVIS_PULL_REQUEST ${TRAVIS_PULL_REQUEST}"
 
 if [ "${TRAVIS_PULL_REQUEST}" = "false" ]
 then
